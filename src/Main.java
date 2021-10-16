@@ -1,5 +1,7 @@
 import Exceptions.*;
 import enumration.*;
+import models.Location;
+import models.Trip;
 import models.Vehicle.Vehicle;
 
 import java.sql.Date;
