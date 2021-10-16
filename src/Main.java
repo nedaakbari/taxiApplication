@@ -44,7 +44,44 @@ public class Main {
                         mainLoop = true;
                         break;
                     case 3:
-                        driverLoginOrRegister();
+                        Driver foundDriver;
+                        System.out.println("Username(nationalCode)");
+                        String case3userName = scanner.next();
+                        foundDriver = application.driverDao.findUserName(case3userName);
+                        if (foundDriver == null) {
+                            inner:
+                            System.out.println("1.Register \n2.Exit");
+                            int input = scanner.nextInt();
+                            while (input != 2) {
+                                switch (input) {
+                                    case 1:
+                                        addDriver();
+                                        break;
+                                    case 2:
+                                        break ;
+
+                                }//switch
+                            }
+                        }//if
+                        else {
+                            if (foundDriver.getTripOfDrivar() == DriverStatus.WAITING) {
+                                System.out.println("you are waiting for find a trip\n1.EXIT");
+                                int choice3 = scanner.nextInt();
+                                switch (choice3) {
+                                    case 1:
+                                        break ;
+                                    default:
+                                        System.out.println("input unavalable");
+                                        break;
+                                }
+                            } else {
+                                System.out.println(foundDriver.getTripOfDrivar());//tripstatus
+                                System.out.println("1.Confirm cash receipt\n" +
+                                        "2.Travel finished\n" +
+                                        "3.Exit");
+                            }//else
+
+                }//driverLoginOrRegister()
                         mainLoop = true;
                         break;
                     case 4:
@@ -140,8 +177,7 @@ public class Main {
 
     public static void driverLoginOrRegister() throws SQLException, InvalidNationalCode, PlaqueException, InvalidPhoneException, InvalidFullNameException, DriverDuplicate {
         Driver foundDriver;
-        outer:
-        while (true) {
+
             System.out.println("Username(nationalCode)");
 
             String case3userName = scanner.next();
@@ -156,7 +192,7 @@ public class Main {
                             addDriver();
                             break;
                         case 2:
-                            break outer;
+                            break ;
 
                     }//switch
                 }
@@ -167,7 +203,7 @@ public class Main {
                     int choice = scanner.nextInt();
                     switch (choice) {
                         case 1:
-                            break mainLoop;
+                            break ;
                         default:
                             System.out.println("input unavalable");
                             break;
@@ -183,7 +219,6 @@ public class Main {
             }//else
 
 
-        }//while
     }//driverLoginOrRegister()
 
 
